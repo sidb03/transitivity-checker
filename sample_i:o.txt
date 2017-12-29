@@ -1,0 +1,48 @@
+Sample Input Outputs:
+
+
+
+Input:
+check_transitive([a,b,c],[(a,b),(b,c),(a,c)]).
+Output:
+Transitive Closure: {(a,b),(b,c),(a,c),}
+Is Transitive?
+true.
+
+Input:
+check_transitive([a,b,c],[(a,b),(b,c),(a,c),(a,a),(b,b)]).
+Output:
+Transitive Closure: {(a,b),(b,c),(a,c),(a,a),(b,b),}
+Is Transitive?
+true.
+
+Input:
+check_transitive([a,b,c],[(a,b),(b,c),(a,c),(b,a)]).
+Output:
+Transitive Closure: {(a,b),(a,a),(b,c),(a,c),(b,a),(b,b),}
+Is Transitive?
+false.
+
+
+Input:
+check_transitive([a,b,c,d,e],[(a,b),(b,c),(a,c),(b,e)]).
+Output:
+Transitive Closure: {(a,b),(a,e),(b,c),(a,c),(b,e),}
+Is Transitive?
+false.
+
+
+Input:
+check_transitive([a,b,c,d,e],[(a,b),(b,c),(a,c),(b,e),(a,e)]).
+Output:
+Transitive Closure: {(a,b),(b,c),(a,c),(b,e),(a,e),}
+Is Transitive?
+true.
+
+Input:
+check_transitive([a,b,c,d,e],[(a,b),(b,c),(a,c),(b,e),(a,e),(d,e),(e,b),(b,b)]).
+Output:
+Transitive Closure: {(a,b),(b,c),(a,c),(b,e),(a,e),(d,e),(d,b),(e,b),(e,c),(e,e),(b,b),}
+Is Transitive?
+false.
+

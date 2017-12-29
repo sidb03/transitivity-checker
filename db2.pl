@@ -1,24 +1,25 @@
 :- dynamic(relation/2).
+:- dynamic(notTrans/1).
 
-getRelation(Relation) :-
-   sub_string(Relation,1,_,1,Relation1),
-   split_string(Relation1,",","()", List),
-   rela(List).
-
-rela(Lis) :-
-    [X,Y|T]=Lis,
-    atom_codes(A,X),
-    atom_codes(B,Y),
-    Fact =.. [relation,A,B],    
+getRelation(List) :-
+    [(X,Y)|T]=List,    
+    Fact =.. [relation,X,Y],    
     assertz(Fact),
-    rela(T).
+    getRelation(T).  
 
 check_transitive(Set, Relation):-
-\+(getRelation(Relation)),
-\+(check_notTrans).
+retractall(notTrans(_)),
+write("Transitive Closure: {"),
+\+(getRelation(Relation)),   
+\+(check_notTrans), 
+write("}"),
+nl,write("Is Transitive?"),
+retractall(relation(_,_)),
+\+(notTrans(rela)).
 
 check_notTrans:-
-relation(X,Y),
+relation(X,Y), 
+format('(~w,~w),',[X,Y]),
 \+(transitive(X,Y)).
 
 transitive(X,Y):-
@@ -37,4 +38,8 @@ check(X,Y,Z):-
 relation(Y,Z),
 relation(X,Z).
 
-
+check(X,Y,Z):-
+relation(Y,Z),
+\+(relation(X,Z)),
+format('(~w,~w),',[X,Z]),
+assertz(notTrans(rela)).
